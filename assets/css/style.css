@@ -62,6 +62,55 @@ main {
     background-color: #45a049;
 }
 
+
+
+/* Group Cards Container */
+.groups h2 {
+    font-size: 1.5em;
+    margin-bottom: 1em;
+}
+
+.group-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1em;
+}
+
+.group-card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 1em;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: fit-content;
+}
+
+.group-card .group-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1em;
+}
+
+.group-card .group-header h3 {
+    margin: 0;
+    font-size: 1.1em;
+}
+
+.group-card .group-header button {
+    background-color: transparent;
+    border: none;
+    font-size: 1.2em;
+    cursor: pointer;
+    padding: 0 0.2em;
+}
+
+/*rest card styles*/
+
 footer {
     background-color: #4CAF50;
     color: white;
