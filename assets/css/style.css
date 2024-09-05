@@ -8,5 +8,65 @@ body {
     font-family: Arial, sans-serif;
     background-color: #f9f9f9;
     color: #333;
+    display: flex;
+    flex-direction: column;
     min-height: 100vh;
+}
+header {
+    background-color: #4CAF50;
+    color: white;
+    text-align: center;
+    padding: 1em 0;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 1.8em;
+}
+
+main {
+    padding: 1em;
+    flex: 1;
+}
+
+/* Group Form  */
+.add-group-form {
+    margin-bottom: 2em;
+    text-align: center;
+}
+
+.add-group-form h2 {
+    font-size: 1.5em;
+    margin-bottom: 1em;
+}
+
+.add-group-form input {
+    padding: 0.5em;
+    font-size: 1em;
+    width: 70%;
+    max-width: 300px;
+    margin-bottom: 0.5em;
+}
+
+.add-group-form button {
+    padding: 0.5em 1em;
+    font-size: 1em;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.add-group-form button:hover {
+    background-color: #45a049;
+}
+
+footer {
+    background-color: #4CAF50;
+    color: white;
+    text-align: center;
+    padding: 1em 0;
+    position: relative;
+    width: 100%;
 }
