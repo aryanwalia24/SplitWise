@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SplitWise - Expense Graph & History</title>
     <link rel="stylesheet" href="assets/css/style.css" />
-    <!-- Favicon -->
     <link
       rel="shortcut icon"
       href="./assets/images/blackLogo.ico"
@@ -16,6 +15,23 @@
     <header>
       <h1>📊 Expense Graph & History</h1>
     </header>
+
+    <main>
+      <section class="graph-and-history"></section>
+        <div class="graph">
+          <canvas id="expenseGraph"></canvas>
+        </div>
+
+        <div class="history transaction-history">
+          <h2>Transaction History</h2>
+          <button id="reverseOrder">Reverse Order</button>
+          <ul id="transactionList">
+            <!-- Transaction history loaded here -->
+          </ul>
+        </div>
+      </section>
+    </main>
+
     <footer>
       <p>© 2024 SplitWise - Expense Tracker</p>
     </footer>
