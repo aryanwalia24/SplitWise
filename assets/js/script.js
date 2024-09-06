@@ -2,9 +2,28 @@ document.addEventListener("DOMContentLoaded", () => {
   const groupForm = document.getElementById("groupForm");
   const groupCardsContainer = document.getElementById("groupCardsContainer");
 
-  let groups = [];
+  let groups = JSON.parse(localStorage.getItem("groups")) || [];
   groups.forEach(group => addGroupToDOM(group));
-  
+
+  groupForm.addEventListener("submit", function(e) {
+    e.preventDefault();
+    const groupName = document.getElementById("groupName").value.trim();
+
+    if (!groupName) {
+      alert("Please enter a group name");
+      return;
+    } else {
+      const newGroup = {
+        name: groupName,
+        members: []
+      };
+      groups.push(newGroup);
+      saveGroupsToLocalStorage();
+      addGroupToDOM(newGroup);
+      groupForm.reset();
+    }
+  });
+
   function addGroupToDOM(group) {
     const groupCard = document.createElement("div");
     groupCard.className = "group-card";
@@ -39,5 +58,8 @@ document.addEventListener("DOMContentLoaded", () => {
         </ul>
     `;
     groupCardsContainer.appendChild(groupCard);
+  }
+  function saveGroupsToLocalStorage() {
+    localStorage.setItem("groups", JSON.stringify(groups));
   }
 });
