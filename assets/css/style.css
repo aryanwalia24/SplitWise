@@ -12,6 +12,7 @@ body {
     flex-direction: column;
     min-height: 100vh;
 }
+
 header {
     background-color: #4CAF50;
     color: white;
@@ -110,6 +111,50 @@ main {
 }
 
 /*rest card styles*/
+.group-card .group-header button:hover {
+    color: #4CAF50;
+}
+
+.group-card .group-header button.delete-group {
+    background-color: transparent;
+    border: none;
+    font-size: 1.5em;
+    cursor: pointer;
+    color: #f44336;
+}
+
+.group-card .group-header button.delete-group:hover {
+    color: #d32f2f;
+}
+
+.group-card .member-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.group-card .member-list li {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5em 0;
+    border-top: 1px solid #f0f0f0;
+    font-size: 0.9em;
+}
+
+.group-card .member-list li:first-child {
+    border-top: none;
+}
+
+.group-card .member-list button {
+    background-color: transparent;
+    border: none;
+    font-size: 1em;
+    cursor: pointer;
+    color: #4CAF50;
+}
+
+/* Expense page */
+/* to be added later */
 
 footer {
     background-color: #4CAF50;
