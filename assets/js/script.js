@@ -2,9 +2,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const groupForm = document.getElementById("groupForm");
   const groupCardsContainer = document.getElementById("groupCardsContainer");
 
+  // web-storage
   let groups = JSON.parse(localStorage.getItem("groups")) || [];
   groups.forEach(group => addGroupToDOM(group));
 
+  // Adding new group
   groupForm.addEventListener("submit", function(e) {
     e.preventDefault();
     const groupName = document.getElementById("groupName").value.trim();
@@ -58,24 +60,48 @@ document.addEventListener("DOMContentLoaded", () => {
         </ul>
     `;
     groupCardsContainer.appendChild(groupCard);
+
+    /*Group Card */
+    // 1. Query Selectors
+    const editNameBtn = groupCard.querySelector(".edit-name");
+    const viewGraphBtn = groupCard.querySelector(".view-graph");
+    const addMemberBtn = groupCard.querySelector(".add-member");
+    const deleteGroupBtn = groupCard.querySelector(".delete-group");
+
+    // 2. Event Listeners
+    editNameBtn.addEventListener("click", () =>
+      editGroupName(group, groupCard)
+    );
+    viewGraphBtn.addEventListener("click", () => viewGraph(group.id));
+    addMemberBtn.addEventListener("click", () => addMember(group, groupCard));
+    deleteGroupBtn.addEventListener("click", () =>
+      deleteGroup(group.id, groupCard)
+    );
+
+    // 3. Event Listeners for Group Members
+    groupCard.querySelectorAll(".add-expense").forEach(btn => {
+      btn.addEventListener("click", function() {
+        const memberIndex = this.getAttribute("data-member-index");
+        addExpense(group, memberIndex, groupCard);
+      });
+    });
+
+    groupCard.querySelectorAll(".edit-member").forEach(btn => {
+      btn.addEventListener("click", function() {
+        const memberIndex = this.getAttribute("data-member-index");
+        editMember(group, memberIndex, groupCard);
+      });
+    });
+
+    groupCard.querySelectorAll(".delete-member").forEach(btn => {
+      btn.addEventListener("click", function() {
+        const memberIndex = this.getAttribute("data-member-index");
+        deleteMember(group, memberIndex, groupCard);
+      });
+    });
   }
 
-  /*Group Card */
-  // 1. Query Selectors
-  const editNameBtn = groupCard.querySelector(".edit-name");
-  const viewGraphBtn = groupCard.querySelector(".view-graph");
-  const addMemberBtn = groupCard.querySelector(".add-member");
-  const deleteGroupBtn = groupCard.querySelector(".delete-group");
-
-  // 2. Event Listeners
-  editNameBtn.addEventListener("click", () => editGroupName(group, groupCard));
-  viewGraphBtn.addEventListener("click", () => viewGraph(group.id));
-  addMemberBtn.addEventListener("click", () => addMember(group, groupCard));
-  deleteGroupBtn.addEventListener("click", () =>
-    deleteGroup(group.id, groupCard)
-  );
-
-  // 3. Functions
+  // Group Card Functions
   function editGroupName(group, groupCard) {
     const newName = prompt("Enter new group name:", group.name);
     if (newName) {
@@ -87,9 +113,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function viewGraph(groupId) {
     localStorage.setItem("selectedGroup", groupId);
-    window.location.href = "graph.html";
+    window.location.href = "expense.html";
   }
 
+  function deleteGroup(groupId, groupCard) {
+    if (confirm("Are you sure you want to delete this group?")) {
+      groups = groups.filter(group => group.id !== groupId);
+      saveGroupsToLocalStorage();
+      groupCard.remove();
+    }
+  }
+
+  /* Group Members Functions */
   function addMember(group, groupCard) {
     const memberName = prompt("Enter member name:");
     const memberExpense = parseFloat(prompt("Enter initial expense:", 0));
@@ -116,21 +151,151 @@ document.addEventListener("DOMContentLoaded", () => {
                 </div>
             `;
       memberList.appendChild(listItem);
+
       groupCard.classList.add("expanded");
+
+      listItem
+        .querySelector(".add-expense")
+        .addEventListener("click", function() {
+          addExpense(group, group.members.length - 1, groupCard);
+        });
+
+      listItem
+        .querySelector(".edit-member")
+        .addEventListener("click", function() {
+          editMember(group, group.members.length - 1, groupCard);
+        });
+
+      listItem
+        .querySelector(".delete-member")
+        .addEventListener("click", function() {
+          deleteMember(group, group.members.length - 1, groupCard);
+        });
     }
   }
 
-  function deleteGroup(groupId, groupCard) {
-    if (confirm("Are you sure you want to delete this group?")) {
-      groups = groups.filter(group => group.id !== groupId);
+  // Member Functions
+  function editMember(group, memberIndex, groupCard) {
+    const member = group.members[memberIndex];
+    const newName = prompt("Enter new name:", member.name);
+    const newExpense = parseFloat(prompt("Enter new expense:", member.expense));
+
+    if (newName && !isNaN(newExpense)) {
+      member.name = newName;
+      member.expense = newExpense;
       saveGroupsToLocalStorage();
-      groupCard.remove();
+      const listItem = groupCard.querySelectorAll(".member-list li")[
+        memberIndex
+      ];
+      listItem.querySelector(".member-name").textContent = newName;
+      listItem.querySelector(
+        ".member-expense"
+      ).textContent = `Rs.${newExpense.toFixed(2)}`;
     }
   }
 
-  /* Group Members */
-  // added later
+  function addExpense(group, memberIndex, groupCard) {
+    const member = group.members[memberIndex];
+    const expenseAmount = parseFloat(prompt("Enter expense amount:", 0));
+    const note = prompt("Add a note for this expense:");
 
+    if (!isNaN(expenseAmount)) {
+      member.expense += expenseAmount;
+
+      const memberListItems = groupCard.querySelectorAll(".member-list li");
+      const listItem = memberListItems[memberIndex];
+
+      listItem.querySelector(
+        ".member-expense"
+      ).textContent = `Rs.${member.expense.toFixed(2)}`;
+
+      const transaction = {
+        memberName: member.name,
+        amount: expenseAmount,
+        note: note,
+        time: new Date().toLocaleString()
+      };
+      group.transactions.push(transaction);
+
+      const groupIndex = groups.findIndex(g => g.id === group.id);
+      groups[groupIndex] = group;
+      saveGroupsToLocalStorage();
+
+      updateTransactionHistory(group);
+
+      if (window.location.href.includes("expense.html")) {
+        renderGraph(group);
+      }
+    }
+  }
+
+  function updateTransactionHistory(group) {
+    const transactionList = document.getElementById("transactionList");
+    if (transactionList) {
+      transactionList.innerHTML = group.transactions
+        .map(
+          transaction => `
+          <li>
+            ${transaction.time} - <strong>${transaction.memberName}</strong>: 
+            ${transaction.amount > 0
+              ? `<span style="color: green;">+${transaction.amount}</span>`
+              : `<span style="color: red;">${transaction.amount}</span>`}
+            , note: ${transaction.note}
+          </li>
+        `
+        )
+        .join("");
+    }
+  }
+
+  function deleteMember(group, memberIndex, groupCard) {
+    if (confirm("Are you sure you want to delete this member?")) {
+      group.members.splice(memberIndex, 1);
+      saveGroupsToLocalStorage();
+
+      const memberList = groupCard.querySelector(".member-list");
+      memberList.innerHTML = group.members
+        .map(
+          (member, index) => `
+            <li>
+                <span class="member-name">${member.name}</span>
+                <span class="member-expense">Rs.${member.expense.toFixed(
+                  2
+                )}</span>
+                <div class="member-buttons">
+                    <button class="add-expense" data-member-index="${index}">➕</button>
+                    <button class="edit-member" data-member-index="${index}">✏️</button>
+                    <button class="delete-member" data-member-index="${index}">❌</button>
+                </div>
+            </li>
+          `
+        )
+        .join("");
+
+      memberList.querySelectorAll(".add-expense").forEach(btn => {
+        btn.addEventListener("click", function() {
+          const memberIndex = this.getAttribute("data-member-index");
+          addExpense(group, memberIndex, groupCard);
+        });
+      });
+
+      memberList.querySelectorAll(".edit-member").forEach(btn => {
+        btn.addEventListener("click", function() {
+          const memberIndex = this.getAttribute("data-member-index");
+          editMember(group, memberIndex, groupCard);
+        });
+      });
+
+      memberList.querySelectorAll(".delete-member").forEach(btn => {
+        btn.addEventListener("click", function() {
+          const memberIndex = this.getAttribute("data-member-index");
+          deleteMember(group, memberIndex, groupCard);
+        });
+      });
+    }
+  }
+
+  // saving groups to local storage
   function saveGroupsToLocalStorage() {
     localStorage.setItem("groups", JSON.stringify(groups));
   }
