@@ -12,12 +12,15 @@
     />
   </head>
   <body>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="assets/js/expense.js" defer></script>
+
     <header>
       <h1>📊 Expense Graph & History</h1>
     </header>
 
     <main>
-      <section class="graph-and-history"></section>
+      <section class="graph-and-history">
         <div class="graph">
           <canvas id="expenseGraph"></canvas>
         </div>
@@ -26,7 +29,7 @@
           <h2>Transaction History</h2>
           <button id="reverseOrder">Reverse Order</button>
           <ul id="transactionList">
-            <!-- Transaction history loaded here -->
+            <!-- Transaction history  -->
           </ul>
         </div>
       </section>
