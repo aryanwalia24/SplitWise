@@ -154,7 +154,29 @@ main {
 }
 
 /* Expense page */
-/* to be added later */
+
+/* Graph */
+.graph-and-history {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.graph {
+    width: 40%;
+    padding-right: 1em;
+}
+
+.history {
+    width: 30%;
+    padding-left: 1em;
+}
+
+.graph-container canvas {
+    width: 100%;
+    height: auto;
+}
 
 footer {
     background-color: #4CAF50;

@@ -16,8 +16,10 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     } else {
       const newGroup = {
+        id: Date.now(),
         name: groupName,
-        members: []
+        members: [],
+        transactions: []
       };
       groups.push(newGroup);
       saveGroupsToLocalStorage();
