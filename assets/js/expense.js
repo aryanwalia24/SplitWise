@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   const expenseGraph = document.getElementById("expenseGraph").getContext("2d");
+  const transactionList = document.getElementById("transactionList");
 
   // Getting selected group from local storage
   const selectedGroupId = localStorage.getItem("selectedGroup");
@@ -8,6 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (group) {
     renderGraph(group);
+    renderTransactionHistory(group, true);
   } else {
     alert("No group data found!");
 
@@ -62,5 +64,26 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       }
     });
+  }
+  function renderTransactionHistory(group, latestFirst) {
+    const transactions = group.transaction
+      .map(
+        transaction => `
+              <li>
+                <p>${transaction.note}</p>
+                <span class="amount ${transaction.amount > 0
+                  ? "positive"
+                  : "negative"}">
+                  ${transaction.amount > 0
+                    ? "+"
+                    : ""}Rs.${transaction.amount.toFixed(2)}
+                </span>
+                <span>${transaction.memberName}</span>
+                <span>${transaction.time}</span>
+              </li>`
+      )
+      .join("");
+
+    transactionList.innerHTML = transactions;
   }
 });
