@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   const expenseGraph = document.getElementById("expenseGraph").getContext("2d");
   const transactionList = document.getElementById("transactionList");
+  const reverseOrderBtn = document.getElementById("reverseOrder");
 
   // Getting selected group from local storage
   const selectedGroupId = localStorage.getItem("selectedGroup");
@@ -10,12 +11,22 @@ document.addEventListener("DOMContentLoaded", () => {
   if (group) {
     renderGraph(group);
     renderTransactionHistory(group, true);
+    reverseOrderBtn.textContent = "Latest ⬆️";
   } else {
     alert("No group data found!");
 
     // Redirect to home page
     window.location.href = "index.html";
   }
+
+  //  Reverse order of transaction history
+  let isLatestFirst = true;
+
+  reverseOrderBtn.addEventListener("click", () => {
+    isLatestFirst = !isLatestFirst;
+    reverseOrderBtn.textContent = isLatestFirst ? "Latest ⬆️" : "Oldest ⬆️";
+    renderTransactionHistory(group, isLatestFirst);
+  });
 
   // update Chart
   function renderGraph(group) {
@@ -66,7 +77,14 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
   function renderTransactionHistory(group, latestFirst) {
-    const transactions = group.transaction
+    const sortedTransactions = group.transactions.sort(
+      (a, b) =>
+        latestFirst
+          ? new Date(b.time) - new Date(a.time)
+          : new Date(a.time) - new Date(b.time)
+    );
+
+    const transactions = sortedTransactions
       .map(
         transaction => `
               <li>
