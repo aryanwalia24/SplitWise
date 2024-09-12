@@ -253,3 +253,54 @@ footer {
     position: relative;
     width: 100%;
 }
+
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .graph {
+        width: 65%;
+    }
+
+    .history {
+        width: 35%;
+    }
+
+    .group-cards {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .graph-and-history {
+        flex-direction: column;
+    }
+
+    .graph {
+        width: 100%;
+        padding: 0;
+        margin-bottom: 1em;
+    }
+
+    .history {
+        width: 100%;
+        padding: 0;
+    }
+
+    .group-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .group-card {
+        padding: 0.5em;
+    }
+}
+
+@media (max-width: 480px) {
+    .group-card .group-header h3 {
+        font-size: 1em;
+    }
+
+    .group-card .member-list li {
+        font-size: 0.8em;
+    }
+}
