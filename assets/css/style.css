@@ -178,6 +178,73 @@ main {
     height: auto;
 }
 
+/* Transaction History */
+.transaction-history {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.transaction-history h2 {
+    font-size: 1.5em;
+    margin-bottom: 1em;
+}
+
+.transaction-history ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.transaction-history ul li {
+    padding: 0.75em 1em;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 1em;
+    display: flex;
+    flex-direction: column;
+}
+
+.transaction-history ul li p {
+    margin: 0 0 0.5em 0;
+    font-weight: bold;
+}
+
+.transaction-history ul li span {
+    display: block;
+    margin-bottom: 0.25em;
+}
+
+.transaction-history ul li .amount {
+    color: #333;
+    font-weight: bold;
+}
+
+.transaction-history ul li .amount.positive {
+    color: green;
+}
+
+.transaction-history ul li .amount.negative {
+    color: red;
+}
+
+#reverseOrder {
+    padding: 8px 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    margin: 10px 0;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+}
+
+#reverseOrder:hover {
+    background-color: #45a049;
+}
+
+/* Footer */
 footer {
     background-color: #4CAF50;
     color: white;
