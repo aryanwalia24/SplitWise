@@ -5,7 +5,7 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f9f9f9;
     color: #333;
     display: flex;
@@ -30,7 +30,7 @@ main {
     flex: 1;
 }
 
-/* Group Form  */
+/* Group Form */
 .add-group-form {
     margin-bottom: 2em;
     text-align: center;
@@ -63,70 +63,99 @@ main {
     background-color: #45a049;
 }
 
-
-
 /* Group Cards Container */
-.groups h2 {
-    font-size: 1.5em;
-    margin-bottom: 1em;
-}
-
 .group-cards {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 1em;
+    align-items: start;
 }
 
+/* Group Card */
 .group-card {
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    padding: 1em;
-    position: relative;
-    overflow: hidden;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    height: fit-content;
+    justify-content: space-between;
+    width: min(300px, 100%);
+    background-color: #fefefe;
+    border-radius: 1rem;
+    padding: 0.5rem;
+    color: #141417;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    transition: box-shadow 0.3s ease;
 }
 
+.group-card:hover {
+    box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.4);
+    transform: scale(1.02);
+}
+
+/* Group Header */
 .group-card .group-header {
+    position: relative;
+    color: white;
+    border-radius: 0.5rem 0.5rem 0 0;
+    padding: 1rem;
+    font-size: 0.875rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1em;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 1rem;
+    font-weight: 700;
+    height: 180px;
+    overflow: hidden;
 }
 
+.group-card .group-header::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.01));
+    z-index: 1;
+}
+
+/* Group Header Image */
+.group-card .group-header img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+    filter: grayscale(70%);
+    transition: filter 0.5s;
+}
+
+.group-card:hover .group-header img {
+    filter: grayscale(0);
+}
+
+/* Group Name */
 .group-card .group-header h3 {
+    position: relative;
+    z-index: 2;
     margin: 0;
-    font-size: 1.1em;
+    font-size: 1.75rem;
+    font-weight: 600;
+    padding-right: 1rem;
+    color: white;
 }
 
-.group-card .group-header button {
-    background-color: transparent;
-    border: none;
-    font-size: 1.2em;
-    cursor: pointer;
-    padding: 0 0.2em;
+/* Group Header Buttons */
+.group-card .group-header-buttons {
+    display: flex;
+    gap: 0.5rem;
 }
 
-/*rest card styles*/
-.group-card .group-header button:hover {
-    color: #4CAF50;
-}
-
-.group-card .group-header button.delete-group {
-    background-color: transparent;
-    border: none;
-    font-size: 1.5em;
-    cursor: pointer;
-    color: #f44336;
-}
-
-.group-card .group-header button.delete-group:hover {
-    color: #d32f2f;
-}
-
+/* Member List */
 .group-card .member-list {
     list-style-type: none;
     padding: 0;
@@ -145,7 +174,13 @@ main {
     border-top: none;
 }
 
-.group-card .member-list button {
+/* Member Buttons */
+.group-card .member-buttons {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.group-card .member-buttons button {
     background-color: transparent;
     border: none;
     font-size: 1em;
@@ -153,154 +188,130 @@ main {
     color: #4CAF50;
 }
 
-/* Expense page */
-
-/* Graph */
-.graph-and-history {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    flex-wrap: wrap;
+.group-card .member-buttons button:hover {
+    color: #45a049;
 }
 
-.graph {
-    width: 40%;
-    padding-right: 1em;
+.group-card.no-members {
+    height: 250px;
 }
 
-.history {
-    width: 30%;
-    padding-left: 1em;
-}
-
-.graph-container canvas {
-    width: 100%;
+.group-card.with-members {
     height: auto;
 }
 
-/* Transaction History */
-.transaction-history {
-    width: 100%;
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-.transaction-history h2 {
-    font-size: 1.5em;
-    margin-bottom: 1em;
-}
-
-.transaction-history ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-}
-
-.transaction-history ul li {
-    padding: 0.75em 1em;
-    border-bottom: 1px solid #f0f0f0;
-    font-size: 1em;
+.member-buttons {
     display: flex;
-    flex-direction: column;
+    gap: 5px;
 }
 
-.transaction-history ul li p {
-    margin: 0 0 0.5em 0;
-    font-weight: bold;
-}
-
-.transaction-history ul li span {
-    display: block;
-    margin-bottom: 0.25em;
-}
-
-.transaction-history ul li .amount {
-    color: #333;
-    font-weight: bold;
-}
-
-.transaction-history ul li .amount.positive {
-    color: green;
-}
-
-.transaction-history ul li .amount.negative {
-    color: red;
-}
-
-#reverseOrder {
-    padding: 8px 16px;
-    background-color: #4CAF50;
-    color: white;
+.member-buttons button {
+    background: none;
     border: none;
-    border-radius: 5px;
+    padding: 5px;
     cursor: pointer;
-    font-size: 14px;
-    margin: 10px 0;
-    display: inline-block;
-    transition: background-color 0.3s ease;
 }
 
-#reverseOrder:hover {
-    background-color: #45a049;
+.member-buttons button img {
+    width: 20px;
+    height: 20px;
 }
 
-/* Footer */
-footer {
-    background-color: #4CAF50;
-    color: white;
+.member-buttons button:hover img {
+    filter: brightness(0.8);
+}
+
+.group-footer-buttons {
+    display: flex;
+    gap: 5px;
+}
+
+.group-footer-buttons button {
+    background: none;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.group-footer-buttons button img {
+    width: 20px;
+    height: 20px;
+}
+
+.group-footer-buttons button:hover img {
+    filter: brightness(0.8);
+}
+
+/* Card Footer */
+.group-card .card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    padding: 0.75rem;
+    row-gap: 1rem;
+    font-weight: 700;
+    font-size: 0.875rem;
+}
+
+.group-card .group-footer-buttons {
+    display: flex;
+    gap: 0.5rem;
+}
+
+
+
+@media (min-width: 340px) {
+    .group-card .card-footer {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+    }
+}
+
+/* Card Button */
+.group-card .card-btn {
+    width: max-content;
+    font-weight: 400;
+    display: block;
     text-align: center;
-    padding: 1em 0;
-    position: relative;
-    width: 100%;
+    padding: 0.5rem 1.25rem;
+    border-radius: 1rem;
+    background-color: #141417;
+    color: #fff;
+    font-size: 1rem;
 }
 
+@media (min-width: 340px) {
+    .group-card .card-btn {
+        width: max-content;
+    }
+}
 
-/* Responsive Design */
+.group-card .secondary-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    background-color: #e0e0e0;
+    color: #333;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+
+.group-card .secondary-btn:hover {
+    background-color: #d5d5d5;
+}
+
 @media (max-width: 1024px) {
-    .graph {
-        width: 65%;
-    }
-
-    .history {
-        width: 35%;
-    }
-
     .group-cards {
         grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     }
 }
 
 @media (max-width: 768px) {
-    .graph-and-history {
-        flex-direction: column;
-    }
-
-    .graph {
-        width: 100%;
-        padding: 0;
-        margin-bottom: 1em;
-    }
-
-    .history {
-        width: 100%;
-        padding: 0;
-    }
-
     .group-cards {
         grid-template-columns: 1fr;
-    }
-
-    .group-card {
-        padding: 0.5em;
-    }
-}
-
-@media (max-width: 480px) {
-    .group-card .group-header h3 {
-        font-size: 1em;
-    }
-
-    .group-card .member-list li {
-        font-size: 0.8em;
     }
 }

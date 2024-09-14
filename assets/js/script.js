@@ -10,7 +10,6 @@ document.addEventListener("DOMContentLoaded", () => {
   groupForm.addEventListener("submit", function(e) {
     e.preventDefault();
     const groupName = document.getElementById("groupName").value.trim();
-
     if (!groupName) {
       alert("Please enter a group name");
       return;
@@ -19,7 +18,8 @@ document.addEventListener("DOMContentLoaded", () => {
         id: Date.now(),
         name: groupName,
         members: [],
-        transactions: []
+        transactions: [],
+        image: getRandomImage()
       };
       groups.push(newGroup);
       saveGroupsToLocalStorage();
@@ -28,18 +28,29 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  function getRandomImage() {
+    const images = [
+      "assets/images/1.jpg",
+      "assets/images/2.jpg",
+      "assets/images/3.jpg",
+      "assets/images/4.jpg",
+      "assets/images/5.jpg",
+      "assets/images/6.jpg",
+      "assets/images/7.jpg",
+      "assets/images/8.jpg",
+      "assets/images/9.jpg",
+      "assets/images/10.jpg"
+    ];
+    const randomIndex = Math.floor(Math.random() * images.length);
+    return images[randomIndex];
+  }
+
   function addGroupToDOM(group) {
     const groupCard = document.createElement("div");
     groupCard.className = "group-card";
     groupCard.innerHTML = `
-        <div class="group-header">
+        <div class="group-header" style="background-image: url('${group.image}'); background-size: cover; background-position: center;">
             <h3>${group.name}</h3>
-            <div class="group-header-buttons">
-                <button class="edit-name">✏️</button>
-                <button class="view-graph">📊</button>
-                <button class="add-member">➕</button>
-                <button class="delete-group">🗑️</button>
-            </div>
         </div>
         <ul class="member-list">
             ${group.members
@@ -51,15 +62,23 @@ document.addEventListener("DOMContentLoaded", () => {
                           2
                         )}</span>
                         <div class="member-buttons">
-                            <button class="add-expense" data-member-index="${index}">➕</button>
-                            <button class="edit-member" data-member-index="${index}">✏️</button>
-                            <button class="delete-member" data-member-index="${index}">❌</button>
+                            <button class="add-expense" data-member-index="${index}"><img src="assets/images/spending.png" alt="Add"></button>
+                            <button class="edit-member" data-member-index="${index}"><img src="assets/images/edit.png" alt="Edit"></button>
+                            <button class="delete-member" data-member-index="${index}"><img src="assets/images/delete.png" alt="Delete"></button>
                         </div>
                     </li>
                 `
               )
               .join("")}
         </ul>
+        <div class="card-footer">
+            <button class="card-btn view-graph">View Graph</button>
+            <div class="group-footer-buttons">
+                <button class="edit-name"><img src="assets/images/edit.png" alt="Edit"></button>
+                <button class="add-member"><img src="assets/images/add-user.png" alt="Add"></button>
+                <button class="delete-group"><img src="assets/images/delete.png" alt="Delete"></button>
+            </div>
+        </div>
     `;
     groupCardsContainer.appendChild(groupCard);
 
@@ -145,11 +164,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 )}</span>
                 <div class="member-buttons">
                     <button class="add-expense" data-member-index="${group
-                      .members.length - 1}">➕</button>
+                      .members.length -
+                      1}"><img src="/assets/images/add-user.png" alt="Add"></button>
                     <button class="edit-member" data-member-index="${group
-                      .members.length - 1}">✏️</button>
+                      .members.length -
+                      1}"><img src="/assets/images/edit.png" alt="Edit"></button>
                     <button class="delete-member" data-member-index="${group
-                      .members.length - 1}">❌</button>
+                      .members.length -
+                      1}"><img src="/assets/images/delete.png" alt="Delete"></button>
                 </div>
             `;
       memberList.appendChild(listItem);
