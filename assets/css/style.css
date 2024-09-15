@@ -42,26 +42,56 @@ main {
 }
 
 .add-group-form input {
-    padding: 0.5em;
+    vertical-align: baseline;
+    font-weight: 500;
     font-size: 1em;
+    line-height: 1.29;
+    letter-spacing: .16px;
+    border-radius: 1px;
+    outline: 2px solid transparent;
+    outline-offset: -2px;
     width: 70%;
-    max-width: 300px;
-    margin-bottom: 0.5em;
-}
-
-.add-group-form button {
-    padding: 0.5em 1em;
-    font-size: 1em;
-    background-color: #4CAF50;
-    color: white;
+    height: 40px;
     border: none;
-    cursor: pointer;
-    border-radius: 5px;
+    border-bottom: 1.5px solid #8d8d8d;
+    background-color: #f4f4f4;
+    padding: 0 16px;
+    color: #161616;
+    transition: background-color 70ms cubic-bezier(.2, 0, .38, .9), outline 70ms cubic-bezier(.2, 0, .38, .9);
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+
 }
 
-.add-group-form button:hover {
-    background-color: #45a049;
+.add-group-form input:focus {
+    outline: 2px solid #667ea3;
+    outline-offset: -2px;
 }
+
+#groupForm {
+    display: flex;
+    margin-left: 35%;
+    margin-right: 30%;
+    gap: 10px;
+}
+
+#groupForm button img {
+    width: 40px;
+    height: 40px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    object-fit: cover;
+    border-radius: 9px;
+}
+
+#groupForm button {
+    border-radius: 9px;
+    border: none;
+}
+
+#groupForm button:hover {
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
 
 /* Group Cards Container */
 .group-cards {
