@@ -12,35 +12,37 @@
     />
   </head>
   <body>
-    <script src="assets/js/script.js" defer></script>
-    <header>
-      <h1>💸 SplitWise - Expense Tracker</h1>
-    </header>
-
-    <main>
-      <section class="add-group-form">
-        <h2>Create a New Group</h2>
-        <form id="groupForm">
-          <input
-            type="text"
-            id="groupName"
-            placeholder="Enter Group Name"
-            required
-          />
-          <button type="submit"><img src="assets/images/arrow.png" alt="submit"></button>
-        </form>
-      </section>
-
-      <section class="groups">
-        <h2>Your Groups</h2>
-        <div class="group-cards" id="groupCardsContainer">
-          <!-- New groups -->
+    <div class="page1">
+      <header class="header1">
+        <p id="p1">SplitWise</p>
+        <p id="p2">EXPENSE TRACKER</p>
+        <div class="fog-low">
+          <img src="/assets/images/fog-low.webp" alt="Fog" />
         </div>
-      </section>
-    </main>
+      </header>
 
-    <footer>
-      <p>© 2024 SplitWise - Expense Tracker</p>
-    </footer>
+      <div class="redirect-button-container" id="goToPage2">
+        <pre class="on-top t1">Group  </pre>
+        <pre class="on-top t2">Page</pre>
+        <img
+          src="assets/images/goto.png"
+          alt="Go to Page 2"
+          style="
+            cursor: pointer;
+            width: 140px;
+            height: 140px;
+            filter: contrast(10);
+          "
+        />
+      </div>
+    </div>
+
+    <script>
+      document
+        .getElementById('goToPage2')
+        .addEventListener('click', function () {
+          window.location.href = 'page2.html'
+        })
+    </script>
   </body>
 </html>

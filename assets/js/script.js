@@ -324,3 +324,23 @@ document.addEventListener("DOMContentLoaded", () => {
     localStorage.setItem("groups", JSON.stringify(groups));
   }
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  const prevButton = document.querySelector(".carousel-button.prev");
+  const nextButton = document.querySelector(".carousel-button.next");
+  const carouselContainer = document.querySelector(".carousel-container");
+
+  prevButton.addEventListener("click", () => {
+    carouselContainer.scrollBy({
+      left: -carouselContainer.clientWidth,
+      behavior: "smooth"
+    });
+  });
+
+  nextButton.addEventListener("click", () => {
+    carouselContainer.scrollBy({
+      left: carouselContainer.clientWidth,
+      behavior: "smooth"
+    });
+  });
+});

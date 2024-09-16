@@ -1,3 +1,5 @@
+@import url(https://fonts.googleapis.com/css?family=Montserrat:400,300,700);
+
 * {
     margin: 0;
     padding: 0;
@@ -5,32 +7,14 @@
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f9f9f9;
+    font-family: Montserrat, Helvetica, Arial, sans-serif;
     color: #333;
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    width: 100vw;
+    overflow: hidden;
 }
 
-header {
-    background-color: #4CAF50;
-    color: white;
-    text-align: center;
-    padding: 1em 0;
-}
-
-header h1 {
-    margin: 0;
-    font-size: 1.8em;
-}
-
-main {
-    padding: 1em;
-    flex: 1;
-}
-
-/* Group Form */
 .add-group-form {
     margin-bottom: 2em;
     text-align: center;
@@ -59,7 +43,6 @@ main {
     color: #161616;
     transition: background-color 70ms cubic-bezier(.2, 0, .38, .9), outline 70ms cubic-bezier(.2, 0, .38, .9);
     box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
-
 }
 
 .add-group-form input:focus {
@@ -93,20 +76,30 @@ main {
 }
 
 
-/* Group Cards Container */
 .group-cards {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
     gap: 1em;
     align-items: start;
+    padding: 1em;
 }
 
-/* Group Card */
+.groups h2 {
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(rgb(255, 255, 255) 35%, rgb(78, 103, 115) 100%) text;
+    font-size: 3em;
+    font-weight: 700;
+    color: rgb(255, 255, 255);
+    -webkit-text-fill-color: transparent;
+    margin-bottom: .6em;
+}
+
 .group-card {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: min(300px, 100%);
+    width: min(290px, 100%);
     background-color: #fefefe;
     border-radius: 1rem;
     padding: 0.5rem;
@@ -119,10 +112,10 @@ main {
 
 .group-card:hover {
     box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.4);
-    transform: scale(1.02);
+    transform: scale(1.01);
 }
 
-/* Group Header */
+
 .group-card .group-header {
     position: relative;
     color: white;
@@ -151,7 +144,6 @@ main {
     z-index: 1;
 }
 
-/* Group Header Image */
 .group-card .group-header img {
     position: absolute;
     top: 0;
@@ -168,7 +160,7 @@ main {
     filter: grayscale(0);
 }
 
-/* Group Name */
+
 .group-card .group-header h3 {
     position: relative;
     z-index: 2;
@@ -179,13 +171,13 @@ main {
     color: white;
 }
 
-/* Group Header Buttons */
+
 .group-card .group-header-buttons {
     display: flex;
     gap: 0.5rem;
 }
 
-/* Member List */
+
 .group-card .member-list {
     list-style-type: none;
     padding: 0;
@@ -204,7 +196,7 @@ main {
     border-top: none;
 }
 
-/* Member Buttons */
+
 .group-card .member-buttons {
     display: flex;
     gap: 0.5rem;
@@ -272,7 +264,7 @@ main {
     filter: brightness(0.8);
 }
 
-/* Card Footer */
+
 .group-card .card-footer {
     display: flex;
     justify-content: space-between;
@@ -290,8 +282,6 @@ main {
     gap: 0.5rem;
 }
 
-
-
 @media (min-width: 340px) {
     .group-card .card-footer {
         flex-direction: row;
@@ -301,7 +291,7 @@ main {
     }
 }
 
-/* Card Button */
+
 .group-card .card-btn {
     width: max-content;
     font-weight: 400;
@@ -342,6 +332,198 @@ main {
 
 @media (max-width: 768px) {
     .group-cards {
-        grid-template-columns: 1fr;
+        grid-template-columns: 2fr;
     }
+}
+
+.page1 {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/assets/images/page1.jpg');
+
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-area {
+    position: relative;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/assets/images/page1.jpg');
+    background-size: cover;
+    background-position: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+
+#p1 {
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(rgb(255, 255, 255) 35%, rgb(78, 103, 115) 100%) text;
+    font-size: 8em;
+    font-weight: 700;
+    color: rgb(255, 255, 255);
+    -webkit-text-fill-color: transparent;
+}
+
+#p2 {
+    color: black;
+    font-size: 2rem;
+    margin-top: -.5em;
+    font-weight: 600;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+    background-image: linear-gradient(rgb(255, 255, 255) 35%, rgb(78, 103, 115) 100%) text;
+
+}
+
+.fog-low {
+    position: absolute;
+    width: 80%;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.5;
+}
+
+.fog-low {
+    right: 0;
+    top: auto;
+    bottom: 231px;
+}
+
+
+.fog-low.right {
+    right: 0;
+    transform: scaleX(-1);
+}
+
+
+.fog-low img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.redirect-button-container {
+    position: relative;
+    text-align: center;
+    margin-top: 50px;
+}
+
+.on-top {
+    position: absolute;
+    top: 70px;
+    left: 50%;
+    rotate: 90deg;
+    transform: translateX(-50%);
+    font-size: 24px;
+    font-weight: bold;
+    color: #fff;
+    z-index: 1;
+    cursor: pointer;
+}
+
+.t1 {
+    rotate: 50deg;
+}
+
+.t2 {
+    left: 40%;
+    rotate: -55deg;
+}
+
+.redirect-button-container img {
+    width: 150px;
+    height: 150px;
+    cursor: pointer;
+}
+
+.carousel {
+    position: relative;
+    overflow: hidden;
+}
+
+.carousel-container {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+}
+
+.carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #667ea3;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.carousel-button.prev {
+    left: 10px;
+}
+
+.carousel-button.next {
+    right: 10px;
+}
+
+.group-cards {
+    display: flex;
+    gap: 1em;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -ms-overflow-style: none;
+    margin-left: 2.5em;
+}
+
+.group-cards::-webkit-scrollbar {
+    display: none;
+}
+
+.group-card {
+    flex: 0 0 auto;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.1)), url('/assets/images/page1.jpg');
+    color: white;
+}
+
+.member-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+.group-card.with-members {
+    height: auto;
+}
+
+.group-card.no-members {
+    height: 250px;
+}
+
+
+::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+    transition: background 0.3s;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }
