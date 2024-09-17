@@ -102,22 +102,19 @@ document.addEventListener("DOMContentLoaded", () => {
     // 3. Event Listeners for Group Members
     groupCard.querySelectorAll(".add-expense").forEach(btn => {
       btn.addEventListener("click", function() {
-        const memberIndex = this.getAttribute("data-member-index");
-        addExpense(group, memberIndex, groupCard);
+        addExpense(group, this.getAttribute("data-member-index"), groupCard);
       });
     });
 
     groupCard.querySelectorAll(".edit-member").forEach(btn => {
       btn.addEventListener("click", function() {
-        const memberIndex = this.getAttribute("data-member-index");
-        editMember(group, memberIndex, groupCard);
+        editMember(group, this.getAttribute("data-member-index"), groupCard);
       });
     });
 
     groupCard.querySelectorAll(".delete-member").forEach(btn => {
       btn.addEventListener("click", function() {
-        const memberIndex = this.getAttribute("data-member-index");
-        deleteMember(group, memberIndex, groupCard);
+        deleteMember(group, this.getAttribute("data-member-index"), groupCard);
       });
     });
   }
@@ -181,19 +178,23 @@ document.addEventListener("DOMContentLoaded", () => {
       listItem
         .querySelector(".add-expense")
         .addEventListener("click", function() {
-          addExpense(group, group.members.length - 1, groupCard);
+          addExpense(group, this.getAttribute("data-member-index"), groupCard);
         });
 
       listItem
         .querySelector(".edit-member")
         .addEventListener("click", function() {
-          editMember(group, group.members.length - 1, groupCard);
+          editMember(group, this.getAttribute("data-member-index"), groupCard);
         });
 
       listItem
         .querySelector(".delete-member")
         .addEventListener("click", function() {
-          deleteMember(group, group.members.length - 1, groupCard);
+          deleteMember(
+            group,
+            this.getAttribute("data-member-index"),
+            groupCard
+          );
         });
     }
   }
@@ -220,36 +221,53 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function addExpense(group, memberIndex, groupCard) {
     const member = group.members[memberIndex];
-    const expenseAmount = parseFloat(prompt("Enter expense amount:", 0));
+    const expenseInput = prompt("Enter expense amount:", 0);
+    const expenseAmount = parseFloat(expenseInput);
     const note = prompt("Add a note for this expense:");
 
-    if (!isNaN(expenseAmount)) {
-      member.expense += expenseAmount;
+    // Error handling: check if the input is a valid number
+    if (
+      expenseInput === "" ||
+      isNaN(expenseInput) ||
+      expenseInput.trim() === ""
+    ) {
+      alert("Please enter a valid numeric expense amount.");
+      return;
+    }
 
-      const memberListItems = groupCard.querySelectorAll(".member-list li");
-      const listItem = memberListItems[memberIndex];
+    const newTotal = member.expense + expenseAmount;
+    if (newTotal < 0) {
+      alert(
+        "Expense cannot result in a negative total. Please enter a valid amount."
+      );
+      return;
+    }
 
-      listItem.querySelector(
-        ".member-expense"
-      ).textContent = `Rs.${member.expense.toFixed(2)}`;
+    member.expense = newTotal;
 
-      const transaction = {
-        memberName: member.name,
-        amount: expenseAmount,
-        note: note,
-        time: new Date().toLocaleString()
-      };
-      group.transactions.push(transaction);
+    const memberListItems = groupCard.querySelectorAll(".member-list li");
+    const listItem = memberListItems[memberIndex];
 
-      const groupIndex = groups.findIndex(g => g.id === group.id);
-      groups[groupIndex] = group;
-      saveGroupsToLocalStorage();
+    listItem.querySelector(
+      ".member-expense"
+    ).textContent = `Rs.${member.expense.toFixed(2)}`;
 
+    const transaction = {
+      memberName: member.name,
+      amount: expenseAmount,
+      note: note,
+      time: new Date().toLocaleString()
+    };
+    group.transactions.push(transaction);
+
+    const groupIndex = groups.findIndex(g => g.id === group.id);
+    groups[groupIndex] = group;
+    saveGroupsToLocalStorage();
+
+    updateTransactionHistory(group);
+
+    if (window.location.href.includes("expense.html")) {
       updateTransactionHistory(group);
-
-      if (window.location.href.includes("expense.html")) {
-        renderGraph(group);
-      }
     }
   }
 
@@ -259,14 +277,13 @@ document.addEventListener("DOMContentLoaded", () => {
       transactionList.innerHTML = group.transactions
         .map(
           transaction => `
-          <li>
-            ${transaction.time} - <strong>${transaction.memberName}</strong>: 
-            ${transaction.amount > 0
-              ? `<span style="color: green;">+${transaction.amount}</span>`
-              : `<span style="color: red;">${transaction.amount}</span>`}
-            , note: ${transaction.note}
-          </li>
-        `
+            <li>
+              <span>${transaction.time}</span>
+              <span>${transaction.memberName}</span>
+              <span>Rs.${transaction.amount.toFixed(2)}</span>
+              <span>${transaction.note}</span>
+            </li>
+          `
         )
         .join("");
     }
@@ -276,46 +293,8 @@ document.addEventListener("DOMContentLoaded", () => {
     if (confirm("Are you sure you want to delete this member?")) {
       group.members.splice(memberIndex, 1);
       saveGroupsToLocalStorage();
-
       const memberList = groupCard.querySelector(".member-list");
-      memberList.innerHTML = group.members
-        .map(
-          (member, index) => `
-            <li>
-                <span class="member-name">${member.name}</span>
-                <span class="member-expense">Rs.${member.expense.toFixed(
-                  2
-                )}</span>
-                <div class="member-buttons">
-                    <button class="add-expense" data-member-index="${index}">➕</button>
-                    <button class="edit-member" data-member-index="${index}">✏️</button>
-                    <button class="delete-member" data-member-index="${index}">❌</button>
-                </div>
-            </li>
-          `
-        )
-        .join("");
-
-      memberList.querySelectorAll(".add-expense").forEach(btn => {
-        btn.addEventListener("click", function() {
-          const memberIndex = this.getAttribute("data-member-index");
-          addExpense(group, memberIndex, groupCard);
-        });
-      });
-
-      memberList.querySelectorAll(".edit-member").forEach(btn => {
-        btn.addEventListener("click", function() {
-          const memberIndex = this.getAttribute("data-member-index");
-          editMember(group, memberIndex, groupCard);
-        });
-      });
-
-      memberList.querySelectorAll(".delete-member").forEach(btn => {
-        btn.addEventListener("click", function() {
-          const memberIndex = this.getAttribute("data-member-index");
-          deleteMember(group, memberIndex, groupCard);
-        });
-      });
+      memberList.children[memberIndex].remove();
     }
   }
 
@@ -343,4 +322,11 @@ document.addEventListener("DOMContentLoaded", () => {
       behavior: "smooth"
     });
   });
+});
+
+// Reload page2 on visit
+window.addEventListener("pageshow", event => {
+  if (event.persisted) {
+    window.location.reload();
+  }
 });
