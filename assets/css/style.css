@@ -12,7 +12,7 @@ body {
     display: flex;
     flex-direction: column;
     width: 100vw;
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 .add-group-form {
@@ -85,14 +85,14 @@ body {
 }
 
 .groups h2 {
-    text-align: center;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
     background: linear-gradient(rgb(255, 255, 255) 35%, rgb(78, 103, 115) 100%) text;
-    font-size: 3em;
+    font-size: 2em;
     font-weight: 700;
     color: rgb(255, 255, 255);
     -webkit-text-fill-color: transparent;
     margin-bottom: .6em;
+    margin-left: 1.7em;
 }
 
 .group-card {
@@ -358,6 +358,16 @@ body {
     height: 100vh;
 }
 
+.add-group-form h2{
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(rgb(255, 255, 255) 35%, rgb(78, 103, 115) 100%) text;
+    font-size: 2em;
+    margin-top: 1.4em;
+    font-weight: 700;
+    color: rgb(255, 255, 255);
+    -webkit-text-fill-color: transparent
+}
 
 #p1 {
     text-align: center;
@@ -452,26 +462,6 @@ body {
     scroll-behavior: smooth;
 }
 
-.carousel-button {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: #667ea3;
-    color: white;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-    z-index: 1;
-}
-
-.carousel-button.prev {
-    left: 10px;
-}
-
-.carousel-button.next {
-    right: 10px;
-}
-
 .group-cards {
     display: flex;
     gap: 1em;
@@ -479,11 +469,9 @@ body {
     overflow-x: auto;
     -ms-overflow-style: none;
     margin-left: 2.5em;
+    margin-right: 2.5em;
 }
 
-.group-cards::-webkit-scrollbar {
-    display: none;
-}
 
 .group-card {
     flex: 0 0 auto;

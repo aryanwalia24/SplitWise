@@ -1,5 +1,23 @@
 body {
     overflow-y: scroll;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.1)), url('/assets/images/page1.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    position: relative;
+    z-index: 1;
+}
+
+
+header {
+    font-size: 2em;
+    margin-bottom: 1em;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(rgb(255, 255, 255) 35%, rgb(78, 103, 115) 100%) text;
+    font-weight: 700;
+    color: rgb(255, 255, 255);
+    -webkit-text-fill-color: transparent
 }
 
 .graph-and-history {
@@ -8,9 +26,7 @@ body {
     grid-template-columns: 1fr 1fr;
     gap: 2em;
     padding: 2em;
-    background: linear-gradient(135deg, rgba(240, 240, 240, 1) 50%, rgba(78, 103, 115, 1) 100%);
     border-radius: 15px;
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 .graph {
@@ -18,7 +34,7 @@ body {
     max-width: 600px;
     height: 74%;
     padding: 1em;
-    background: rgba(255, 255, 255, 0.8);
+    background-image: linear-gradient(rgba(255, 255, 255, 1), rgba(255, 255, 255, .4)), url('/assets/images/page1.jpg');
     border-radius: 15px;
     box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
     text-align: center;
@@ -44,6 +60,7 @@ body {
     max-width: 600px;
     background: rgba(255, 255, 255, 0.9);
     box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    background-image: linear-gradient(rgba(255, 255, 255, 1), rgba(255, 255, 255, .4)), url('/assets/images/page1.jpg');
     border-radius: 15px;
     padding: 1em;
     max-height: 500px;

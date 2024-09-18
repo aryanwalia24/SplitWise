@@ -12,7 +12,8 @@
     />
   </head>
   <body>
-    <div class="page1">
+    <script src="/assets/js/script.js" defer></script>
+    <div class="page1" id="section1">
       <header class="header1">
         <p id="p1">SplitWise</p>
         <p id="p2">EXPENSE TRACKER</p>
@@ -21,12 +22,12 @@
         </div>
       </header>
 
-      <div class="redirect-button-container" id="goToPage2">
+      <div class="redirect-button-container" id="scrollToSection2">
         <pre class="on-top t1">Group  </pre>
         <pre class="on-top t2">Page</pre>
         <img
           src="assets/images/goto.png"
-          alt="Go to Page 2"
+          alt="Scroll to Page 2"
           style="
             cursor: pointer;
             width: 140px;
@@ -37,11 +38,41 @@
       </div>
     </div>
 
+    <div class="main-area" id="section2">
+      <section class="add-group-form">
+        <h2>Create a New Group</h2>
+        <form id="groupForm">
+          <input
+            type="text"
+            id="groupName"
+            placeholder="Enter Group Name"
+            required
+          />
+          <button type="submit">
+            <img src="assets/images/arrow.png" alt="submit" />
+          </button>
+        </form>
+      </section>
+
+      <section class="groups">
+        <h2>Your Groups</h2>
+        <div class="carousel">
+          <div class="carousel-container">
+            <div class="group-cards" id="groupCardsContainer">
+              <!-- New groups added here -->
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
     <script>
       document
-        .getElementById('goToPage2')
+        .getElementById('scrollToSection2')
         .addEventListener('click', function () {
-          window.location.href = 'page2.html'
+          document.getElementById('section2').scrollIntoView({
+            behavior: 'smooth'
+          })
         })
     </script>
   </body>
