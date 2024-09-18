@@ -13,19 +13,18 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!groupName) {
       alert("Please enter a group name");
       return;
-    } else {
-      const newGroup = {
-        id: Date.now(),
-        name: groupName,
-        members: [],
-        transactions: [],
-        image: getRandomImage()
-      };
-      groups.push(newGroup);
-      saveGroupsToLocalStorage();
-      addGroupToDOM(newGroup);
-      groupForm.reset();
     }
+    const newGroup = {
+      id: Date.now(),
+      name: groupName,
+      members: [],
+      transactions: [],
+      image: getRandomImage()
+    };
+    groups.push(newGroup);
+    saveGroupsToLocalStorage();
+    addGroupToDOM(newGroup);
+    groupForm.reset();
   });
 
   function getRandomImage() {
@@ -130,6 +129,17 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function viewGraph(groupId) {
+    const selectedGroup = groups.find(group => group.id === groupId);
+
+    if (selectedGroup.members.length === 0) {
+      alert("No members in this group yet.");
+      return;
+    }
+
+    if (selectedGroup.transactions.length === 0) {
+      alert("No transaction history for this group yet.");
+      return;
+    }
     localStorage.setItem("selectedGroup", groupId);
     window.location.href = "expense.html";
   }
@@ -298,13 +308,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // saving groups to local storage
   function saveGroupsToLocalStorage() {
     localStorage.setItem("groups", JSON.stringify(groups));
   }
-});
 
-document.addEventListener("DOMContentLoaded", () => {
   const prevButton = document.querySelector(".carousel-button.prev");
   const nextButton = document.querySelector(".carousel-button.next");
   const carouselContainer = document.querySelector(".carousel-container");
@@ -322,11 +329,4 @@ document.addEventListener("DOMContentLoaded", () => {
       behavior: "smooth"
     });
   });
-});
-
-// Reload page2 on visit
-window.addEventListener("pageshow", event => {
-  if (event.persisted) {
-    window.location.reload();
-  }
 });
