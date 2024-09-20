@@ -20,11 +20,6 @@ body {
     text-align: center;
 }
 
-.add-group-form h2 {
-    font-size: 1.5em;
-    margin-bottom: 1em;
-}
-
 .add-group-form input {
     vertical-align: baseline;
     font-weight: 500;
@@ -34,7 +29,7 @@ body {
     border-radius: 1px;
     outline: 2px solid transparent;
     outline-offset: -2px;
-    width: 70%;
+    width: 50%;
     height: 40px;
     border: none;
     border-bottom: 1.5px solid #8d8d8d;
@@ -52,8 +47,7 @@ body {
 
 #groupForm {
     display: flex;
-    margin-left: 35%;
-    margin-right: 30%;
+    justify-content: center;
     gap: 10px;
 }
 
@@ -75,15 +69,6 @@ body {
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-
-.group-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
-    gap: 1em;
-    align-items: start;
-    padding: 1em;
-}
-
 .groups h2 {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
     background: linear-gradient(rgb(255, 255, 255) 35%, rgb(78, 103, 115) 100%) text;
@@ -100,21 +85,20 @@ body {
     flex-direction: column;
     justify-content: space-between;
     width: min(290px, 100%);
-    background-color: #fefefe;
     border-radius: 1rem;
     padding: 0.5rem;
-    color: #141417;
     position: relative;
     overflow: hidden;
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
     transition: box-shadow 0.3s ease;
+    flex: 0 0 auto;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.1)), url('/assets/images/page1.jpg');
+    color: white;
 }
 
 .group-card:hover {
     box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.4);
     transform: scale(1.01);
 }
-
 
 .group-card .group-header {
     position: relative;
@@ -160,7 +144,6 @@ body {
     filter: grayscale(0);
 }
 
-
 .group-card .group-header h3 {
     position: relative;
     z-index: 2;
@@ -171,12 +154,10 @@ body {
     color: white;
 }
 
-
 .group-card .group-header-buttons {
     display: flex;
     gap: 0.5rem;
 }
-
 
 .group-card .member-list {
     list-style-type: none;
@@ -196,7 +177,6 @@ body {
     border-top: none;
 }
 
-
 .group-card .member-buttons {
     display: flex;
     gap: 0.5rem;
@@ -212,14 +192,6 @@ body {
 
 .group-card .member-buttons button:hover {
     color: #45a049;
-}
-
-.group-card.no-members {
-    height: 250px;
-}
-
-.group-card.with-members {
-    height: auto;
 }
 
 .member-buttons {
@@ -264,7 +236,6 @@ body {
     filter: brightness(0.8);
 }
 
-
 .group-card .card-footer {
     display: flex;
     justify-content: space-between;
@@ -282,16 +253,6 @@ body {
     gap: 0.5rem;
 }
 
-@media (min-width: 340px) {
-    .group-card .card-footer {
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-        gap: 1rem;
-    }
-}
-
-
 .group-card .card-btn {
     width: max-content;
     font-weight: 400;
@@ -302,12 +263,6 @@ body {
     background-color: #141417;
     color: #fff;
     font-size: 1rem;
-}
-
-@media (min-width: 340px) {
-    .group-card .card-btn {
-        width: max-content;
-    }
 }
 
 .group-card .secondary-btn {
@@ -324,24 +279,11 @@ body {
     background-color: #d5d5d5;
 }
 
-@media (max-width: 1024px) {
-    .group-cards {
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    }
-}
-
-@media (max-width: 768px) {
-    .group-cards {
-        grid-template-columns: 2fr;
-    }
-}
-
 .page1 {
     position: relative;
     width: 100vw;
     height: 100vh;
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/assets/images/page1.jpg');
-
     background-size: cover;
     background-position: center;
     display: flex;
@@ -355,94 +297,28 @@ body {
     background-size: cover;
     background-position: center;
     width: 100vw;
-    height: 100vh;
+    height: 100dvh;
 }
 
-.add-group-form h2{
+.add-group-form h2 {
     text-align: center;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
     background: linear-gradient(rgb(255, 255, 255) 35%, rgb(78, 103, 115) 100%) text;
     font-size: 2em;
+    margin-bottom: 1em;
     margin-top: 1.4em;
-    font-weight: 700;
-    color: rgb(255, 255, 255);
-    -webkit-text-fill-color: transparent
-}
-
-#p1 {
-    text-align: center;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-    background: linear-gradient(rgb(255, 255, 255) 35%, rgb(78, 103, 115) 100%) text;
-    font-size: 8em;
     font-weight: 700;
     color: rgb(255, 255, 255);
     -webkit-text-fill-color: transparent;
 }
 
-#p2 {
-    color: black;
-    font-size: 2rem;
-    margin-top: -.5em;
-    font-weight: 600;
-    text-align: center;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
-    background-image: linear-gradient(rgb(255, 255, 255) 35%, rgb(78, 103, 115) 100%) text;
-
-}
-
-.fog-low {
-    position: absolute;
-    width: 80%;
-    pointer-events: none;
-    z-index: 1;
-    opacity: 0.5;
-}
-
-.fog-low {
-    right: 0;
-    top: auto;
-    bottom: 231px;
-}
-
-
-.fog-low.right {
-    right: 0;
-    transform: scaleX(-1);
-}
-
-
-.fog-low img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-}
-
 .redirect-button-container {
     position: relative;
     text-align: center;
-    margin-top: 50px;
-}
-
-.on-top {
-    position: absolute;
-    top: 70px;
-    left: 50%;
-    rotate: 90deg;
-    transform: translateX(-50%);
-    font-size: 24px;
-    font-weight: bold;
-    color: #fff;
-    z-index: 1;
     cursor: pointer;
-}
-
-.t1 {
-    rotate: 50deg;
-}
-
-.t2 {
-    left: 40%;
-    rotate: -55deg;
+    width: 140px;
+    height: 140px;
+    filter: contrast(1.5);
 }
 
 .redirect-button-container img {
@@ -451,32 +327,10 @@ body {
     cursor: pointer;
 }
 
-.carousel {
-    position: relative;
-    overflow: hidden;
-}
-
 .carousel-container {
     display: flex;
     overflow-x: auto;
     scroll-behavior: smooth;
-}
-
-.group-cards {
-    display: flex;
-    gap: 1em;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    -ms-overflow-style: none;
-    margin-left: 2.5em;
-    margin-right: 2.5em;
-}
-
-
-.group-card {
-    flex: 0 0 auto;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.1)), url('/assets/images/page1.jpg');
-    color: white;
 }
 
 .member-list {
@@ -490,11 +344,6 @@ body {
 .group-card.with-members {
     height: auto;
 }
-
-.group-card.no-members {
-    height: 250px;
-}
-
 
 ::-webkit-scrollbar {
     width: 12px;
@@ -514,4 +363,131 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
     background: #555;
+}
+
+@media (max-width: 1024px) {
+    .group-cards {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    }
+
+    .add-group-form input {
+        width: 50%;
+    }
+
+    .group-card .group-header h3 {
+        font-size: 1.5rem;
+    }
+
+    .group-card .card-btn {
+        font-size: 0.9rem;
+    }
+
+    .group-card .secondary-btn {
+        font-size: 0.8rem;
+    }
+
+    .carousel-container {
+        padding: 0 1em;
+    }
+}
+
+@media (max-width: 768px) {
+    .group-cards {
+        grid-template-columns: 2fr;
+    }
+}
+
+#p1 {
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(rgb(255, 255, 255) 35%, rgb(78, 103, 115) 100%) text;
+    font-size: 8em;
+    font-weight: 700;
+    -webkit-text-fill-color: transparent;
+}
+
+#p2 {
+    font-size: 2rem;
+    margin-top: -.5em;
+    font-weight: 600;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+    background: linear-gradient(rgb(125, 125, 125) 55%, rgb(83, 158, 193) 100%) text;
+    -webkit-text-fill-color: transparent;
+}
+
+.carousel {
+    position: relative;
+    overflow: hidden;
+}
+
+.group-cards {
+    display: flex;
+    gap: 1em;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -ms-overflow-style: none;
+    margin-left: 2.5em;
+    align-items: start;
+    width: 100%;
+    padding: 1em;
+}
+
+.group-card.no-members {
+    height: 250px;
+}
+
+@media (max-width: 1200px) {
+    #p1 {
+        font-size: 6em;
+    }
+
+    #p2 {
+        font-size: 1.5rem;
+    }
+
+    .redirect-button-container img {
+        width: 120px;
+        height: 120px;
+        margin-top: 1em;
+    }
+}
+
+@media (max-width: 768px) {
+    #p1 {
+        font-size: 4em;
+    }
+
+    #p2 {
+        font-size: 1.2rem;
+    }
+
+    .redirect-button-container img {
+        width: 90px;
+        height: 90px;
+        margin-left: -4rem;
+        margin-top: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    #p1 {
+        font-size: 3em;
+        margin: 0 1em;
+    }
+
+    #p2 {
+        font-size: 1rem;
+    }
+
+    .redirect-button-container img {
+        width: 60px;
+        height: 60px;
+        margin-top: 2.5rem;
+    }
+
+    .groups h2 {
+        margin-left: 0;
+        text-align: center;
+    }
 }
